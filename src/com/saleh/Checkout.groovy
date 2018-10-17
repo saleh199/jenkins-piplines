@@ -1,4 +1,4 @@
-#!/usr/bin/groovey
+#!/usr/bin/groovy
 
 package com.saleh;
 
