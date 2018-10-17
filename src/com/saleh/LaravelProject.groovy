@@ -18,6 +18,17 @@ def run(Object step, opts){
 def execute(projectName){
     this.run(new Checkout(), null);
     this.run(new ComposerInstall(), null);
+
+    stage("create-env-keys"){
+        sh "cp .env.example .env";
+        sh "php artisan key:generate";
+    }
+
+    this.run(new PhpUnit(), null);
+    this.run(new XUnit(), null);
+    this.run(new Coverage(), [healthy: 80, unhealthy: 50, failing: 0]);
+
+
 }
 
 return this
